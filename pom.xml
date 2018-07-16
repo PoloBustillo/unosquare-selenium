@@ -101,6 +101,13 @@
                         <fileDownloadReadTimeout>10000</fileDownloadReadTimeout>
                         <overwriteFilesThatExist>false</overwriteFilesThatExist>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>selenium</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                     <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
