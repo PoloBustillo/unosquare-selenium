@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>unosquare.example</groupId>
+    <artifactId>selenium</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <contributors>
+        <!-- alphabetic order -->
+        <contributor>
+            <name>Mario Bustillo</name>
+        </contributor>
+    </contributors>
+    <properties>
+        <webdriver.chrome.driver>tmp/binaries/windows/googlechrome/64bit/chromedriver.exe</webdriver.chrome.driver>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <suiteXmlFile>${basedir}/src/test/suites.xml</suiteXmlFile>
+        <skipTests>false</skipTests>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
+        <dependency>
+            <groupId>org.uncommons</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>16.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>16.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/velocity/velocity-dep -->
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity-dep</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+    </dependencies>
+    <profiles>
+        <profile>
+        <id>run test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                    <groupId>com.lazerycode.selenium</groupId>
+                    <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+                    <version>1.0.8</version>
+                    <configuration>
+                        <rootStandaloneServerDirectory>tmp/binaries</rootStandaloneServerDirectory>
+                        <downloadedZipFileDirectory>tmp/zips</downloadedZipFileDirectory>
+                        <customRepositoryMap>RepositoryMap.xml</customRepositoryMap>
+                        <operatingSystems>
+                            <mac>true</mac>
+                        </operatingSystems>
+                        <thirtyTwoBitBinaries>true</thirtyTwoBitBinaries>
+                        <sixtyFourBitBinaries>true</sixtyFourBitBinaries>
+                        <onlyGetLatestVersions>true</onlyGetLatestVersions>
+                        <fileDownloadRetryAttempts>2</fileDownloadRetryAttempts>
+                        <fileDownloadConnectTimeout>20000</fileDownloadConnectTimeout>
+                        <fileDownloadReadTimeout>10000</fileDownloadReadTimeout>
+                        <overwriteFilesThatExist>false</overwriteFilesThatExist>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>selenium</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                    <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.7.1</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                        </systemPropertyVariables>
+
+                        <properties>
+                            <!-- Setting ReportNG listeners -->
+                            <property>
+                                <name>listener</name>
+                                <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                            </property>
+                        </properties>
+
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <skipTests>${skipTests}</skipTests>
+                        <testFailureIgnore>true</testFailureIgnore>
+                        <groups>amazon</groups>
+                    </configuration>
+                </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

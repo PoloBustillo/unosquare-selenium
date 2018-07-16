@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3" name="Suite" parallel="methods">
+    <suite-files>
+        <suite-file path="amazonSuite.xml" />
+        <suite-file path="hotmailSuite.xml" />
+    </suite-files>
+</suite>

@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Amazon Functional testing" parallel="classes" verbose="2" thread-count="3">
+    <listeners>
+        <listener class-name="utils.listeners.Listener"></listener>
+        <listener class-name="utils.listeners.Reporter"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+    <test name="login">
+        <groups>
+            <define name = "all">
+                <include name = "one"/>
+                <include name = "two"/>
+                <include name = "amazon"/>
+            </define>
+            <run>
+                <include name="all" />
+            </run>
+        </groups>
+        <classes>
+            <class name="amazon.Test_01_Selenium_Amazon" />
+            <class name="amazon.Test_02_Selenium_Amazon" />
+        </classes>
+    </test>
+
+</suite>

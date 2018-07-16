@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Hotmail Functional testing">
+
+    <test name="hotmail">
+        <classes>
+            <class name="Test_01_Selenium_Hotmail" />
+        </classes>
+    </test>
+
+</suite>
