@@ -27,7 +27,7 @@ public class Test_01_Selenium_Hotmail extends BaseTest{
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(username,"test_user");
         softAssert.assertEquals(password,"password");
-        softAssert.assertAll();
+        //softAssert.assertAll();
 
     }
 
