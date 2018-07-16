@@ -15,8 +15,9 @@ public abstract class BaseTest {
     @BeforeClass
     public void setUp() {
         System.out.println("SETUP");
+        System.setProperty("webdriver.chrome.driver","tmp/binaries/windows/googlechrome/64bit/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        //chromeOptions.addArguments("--headless");
         driver = new ChromeDriver(chromeOptions);
         driver.get(props.load().getProperty("url"));
         //System.out.println(System.getProperty("webdriver.chrome.driver"));
